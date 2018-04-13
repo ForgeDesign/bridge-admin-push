@@ -24,7 +24,8 @@
     <br>
     <button class="btn btn-danger" onClick="deleteObject()">Delete</button>
 
-    <button class="btn btn-primary" id="first">First Name</button>
+    <button class="btn btn-primary" id="logo">Logo</button>
+    <button class="btn btn-primary" id="first">Full Name</button>
     <button id="last" class="btn btn-primary">Last Name</button>
     <button id="email" class="btn btn-primary">Email</button>
     <button id="website" class="btn btn-primary">Website</button>
@@ -37,11 +38,13 @@
 
     <input type='text' id='fontSize' value='40' />
     <input type='text' id='fontColor' value='#000000' />
-    <input type='text' id='fontSize' placeholder='Template Name' />
+    <input type='text' id='templateName' placeholder='Template Name' />
 
     <br>
 
     <canvas id="c" width="1050" height="600"></canvas>
+    <img src="logo.jpg" id="my-image" hidden>
+
 
     <br>
     <p class="save">
@@ -95,14 +98,14 @@
 
     </script>
     <script>
-    getBase64 = function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader(); 
-        reader.readAsDataURL(file); 
-        reader.onload = () => resolve(reader.result); 
-        reader.onerror = error => reject(error);
-    });
-}
+        getBase64 = function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
 
     </script>
 
@@ -111,7 +114,9 @@
         var canvas;
         var cards;
         var base64data;
+        var objects;
         var total_file;
+
         function preview_image() {
             // initialize canvas
             canvas = new fabric.Canvas('c');
@@ -122,7 +127,7 @@
             // save all the uploaded files as base64 for later upload
             var reader = new FileReader();
             total_file = document.getElementById("upload_file").files.length;
-            
+
             Promise.all(
                 Array.from(event.target.files)
                     .map(file => getBase64(file)
@@ -151,8 +156,8 @@
         }
 
         $("#save").on("click", function (e) {
-            var objects = null,
-                objects = canvas.getObjects();
+
+            objects = canvas.getObjects();
 
             // remove the grid lines from the canvas
             var lines = canvas.getObjects('line');
@@ -173,7 +178,7 @@
             canvas.getActiveObject().remove();
         }
         $("#first").on("click", function (e) {
-            text = new fabric.Text('Ryan', {
+            text = new fabric.Text('Ryan Camardo', {
                 left: 100,
                 top: 100,
                 fontSize: +$("#fontSize").val(),
@@ -192,27 +197,27 @@
             });
             canvas.add(text);
         });
-        $("#last").on("click", function (e) {
-            text = new fabric.Text('Camardo', {
-                left: 100,
-                top: 100,
-                fontSize: +$("#fontSize").val(),
-                fill: $("#fontColor").val()
-            });
-            text.setControlsVisibility({
-                mt: false,
-                mb: false,
-                ml: false,
-                mr: false,
-                bl: false,
-                br: false,
-                tl: false,
-                tr: false,
-                mtr: false,
-            });
+        // $("#last").on("click", function (e) {
+        //     text = new fabric.Text('Camardo', {
+        //         left: 100,
+        //         top: 100,
+        //         fontSize: +$("#fontSize").val(),
+        //         fill: $("#fontColor").val()
+        //     });
+        //     text.setControlsVisibility({
+        //         mt: false,
+        //         mb: false,
+        //         ml: false,
+        //         mr: false,
+        //         bl: false,
+        //         br: false,
+        //         tl: false,
+        //         tr: false,
+        //         mtr: false,
+        //     });
 
-            canvas.add(text);
-        });
+        //     canvas.add(text);
+        // });
         $("#email").on("click", function (e) {
             text = new fabric.Text('ryan@bridgeapp.com', {
                 left: 100,
@@ -381,6 +386,30 @@
 
             canvas.add(text);
         });
+        $("#logo").on("click", function (e) {
+            var imgElement = document.getElementById('my-image');
+
+            image = new fabric.Image(imgElement, {
+                left: 100,
+                top: 100,
+                width: 100,
+                height: 100,
+            });
+            image.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(image);
+        });
+
         // $("#rect").on("click", function (e) {
         //     rect = new fabric.Rect({
         //         left: 40,
