@@ -47,28 +47,54 @@
     <br>
     <p class="save">
     </p>
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js"></script>
+
+    
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-database.js"></script>
+
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "",
+            authDomain: "bridge-card.firebaseapp.com",
+            databaseURL: "https://bridge-card.firebaseio.com",
+            projectId: "bridge-card",
+            storageBucket: "bridge-card.appspot.com",
+            messagingSenderId: ""
+        };
+        firebase.initializeApp(config);
+    </script> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js"></script>
+
+
     <script>
 
     </script>
     <script>
         $("#form_upload_template").submit(function (e) {
             e.preventDefault();
-            console.log(base64data);
+            // alert($("#templateName").val())
+            myData = {
+                "card_schemes": base64data,
+                "template_name": $("#templateName").val(),
+                "stylings": objects,
+            }
+            // console.log($("#templateName").val());
+
             $.ajax({
                 type: "POST",
-                url: "./upload_file.php",
-                // The key needs to match your method's input parameter (case-sensitive).
-                data: templateData,
+                url: "http://localhost/bridge-admin-push/upload_file.php",
+                data: JSON.stringify(myData),
                 error: function (data) {
 
                     console.log("error");
@@ -86,7 +112,7 @@
 
                     return false;
 
-                    window.location.reload();
+                    // window.location.reload();
                 },
                 contentType: "application/json",
                 dataType: "json"
@@ -342,7 +368,7 @@
 
             canvas.add(text);
         });
-        
+
         $("#logo").on("click", function (e) {
             var imgElement = document.getElementById('my-image');
 
