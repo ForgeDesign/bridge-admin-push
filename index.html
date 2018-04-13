@@ -26,15 +26,13 @@
 
     <button class="btn btn-primary" id="logo">Logo</button>
     <button class="btn btn-primary" id="first">Full Name</button>
-    <button id="last" class="btn btn-primary">Last Name</button>
+    <button id="title" class="btn btn-primary">Title</button>
     <button id="email" class="btn btn-primary">Email</button>
     <button id="website" class="btn btn-primary">Website</button>
     <button id="phonenum" class="btn btn-primary">Phone Number</button>
     <button id="businame" class="btn btn-primary">Business Name</button>
-    <button id="address" class="btn btn-primary">Address</button>
-    <button id="city" class="btn btn-primary">City</button>
-    <button id="state" class="btn btn-primary">State</button>
-    <button id="zip" class="btn btn-primary">Zip Code</button>
+    <button id="address1" class="btn btn-primary">Address1</button>
+    <button id="address2" class="btn btn-primary">Address2</button>
 
     <input type='text' id='fontSize' value='40' />
     <input type='text' id='fontColor' value='#000000' />
@@ -197,27 +195,27 @@
             });
             canvas.add(text);
         });
-        // $("#last").on("click", function (e) {
-        //     text = new fabric.Text('Camardo', {
-        //         left: 100,
-        //         top: 100,
-        //         fontSize: +$("#fontSize").val(),
-        //         fill: $("#fontColor").val()
-        //     });
-        //     text.setControlsVisibility({
-        //         mt: false,
-        //         mb: false,
-        //         ml: false,
-        //         mr: false,
-        //         bl: false,
-        //         br: false,
-        //         tl: false,
-        //         tr: false,
-        //         mtr: false,
-        //     });
+        $("#title").on("click", function (e) {
+            text = new fabric.Text('CEO', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
 
-        //     canvas.add(text);
-        // });
+            canvas.add(text);
+        });
         $("#email").on("click", function (e) {
             text = new fabric.Text('ryan@bridgeapp.com', {
                 left: 100,
@@ -302,7 +300,7 @@
 
             canvas.add(text);
         });
-        $("#address").on("click", function (e) {
+        $("#address1").on("click", function (e) {
             text = new fabric.Text('1849 Address Lane', {
                 left: 100,
                 top: 100,
@@ -323,8 +321,8 @@
 
             canvas.add(text);
         });
-        $("#city").on("click", function (e) {
-            text = new fabric.Text('Kent', {
+        $("#address2").on("click", function (e) {
+            text = new fabric.Text('Stow, Ohio 44224', {
                 left: 100,
                 top: 100,
                 fontSize: +$("#fontSize").val(),
@@ -344,48 +342,7 @@
 
             canvas.add(text);
         });
-        $("#state").on("click", function (e) {
-            text = new fabric.Text('OH', {
-                left: 100,
-                top: 100,
-                fontSize: +$("#fontSize").val(),
-                fill: $("#fontColor").val()
-            });
-            text.setControlsVisibility({
-                mt: false,
-                mb: false,
-                ml: false,
-                mr: false,
-                bl: false,
-                br: false,
-                tl: false,
-                tr: false,
-                mtr: false,
-            });
-
-            canvas.add(text);
-        });
-        $("#zip").on("click", function (e) {
-            text = new fabric.Text('44224', {
-                left: 100,
-                top: 100,
-                fontSize: +$("#fontSize").val(),
-                fill: $("#fontColor").val()
-            });
-            text.setControlsVisibility({
-                mt: false,
-                mb: false,
-                ml: false,
-                mr: false,
-                bl: false,
-                br: false,
-                tl: false,
-                tr: false,
-                mtr: false,
-            });
-
-            canvas.add(text);
-        });
+        
         $("#logo").on("click", function (e) {
             var imgElement = document.getElementById('my-image');
 
