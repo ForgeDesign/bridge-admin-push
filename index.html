@@ -14,6 +14,14 @@
 </head>
 
 <body>
+    <div id="wrapper">
+        <form action="upload_file.php" method="post" enctype="multipart/form-data" id="form_upload_template">
+            <input type="file" id="upload_file" name="upload_file[]" onchange="preview_image();" multiple />
+            <input type="submit" name='submit_image' value="Upload + Push" id="save" class="btn btn-success" />
+        </form>
+        <div id="image_preview"></div>
+    </div>
+    <br>
     <button class="btn btn-danger" onClick="deleteObject()">Delete</button>
 
     <button class="btn btn-primary" id="first">First Name</button>
@@ -26,11 +34,15 @@
     <button id="city" class="btn btn-primary">City</button>
     <button id="state" class="btn btn-primary">State</button>
     <button id="zip" class="btn btn-primary">Zip Code</button>
-    <button id="save" class="btn btn-success">Submit</button>
+
     <input type='text' id='fontSize' value='40' />
     <input type='text' id='fontColor' value='#000000' />
+    <input type='text' id='fontSize' placeholder='Template Name' />
+
     <br>
+
     <canvas id="c" width="1050" height="600"></canvas>
+
     <br>
     <p class="save">
     </p>
@@ -44,17 +56,119 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js"></script>
+    <script>
+
+    </script>
+    <script>
+        $("#form_upload_template").submit(function (e) {
+            e.preventDefault();
+            console.log(base64data);
+            $.ajax({
+                type: "POST",
+                url: "./upload_file.php",
+                // The key needs to match your method's input parameter (case-sensitive).
+                data: templateData,
+                error: function (data) {
+
+                    console.log("error");
+                    console.log(data);
+                    alert("Template submitted! ")
+
+                    return false;
+
+                    //window.location.reload();
+                },
+                success: function (data) {
+                    console.log("success");
+                    console.log(data);
+                    alert("Template submitted! ")
+
+                    return false;
+
+                    window.location.reload();
+                },
+                contentType: "application/json",
+                dataType: "json"
+            });
+
+        });
+
+    </script>
+    <script>
+    getBase64 = function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload = () => resolve(reader.result); 
+        reader.onerror = error => reject(error);
+    });
+}
+
+    </script>
 
     <script>
-        // grab list of images in a directory
-        // https://stackoverflow.com/questions/6994212/is-there-a-way-to-return-a-list-of-all-the-image-file-names-from-a-folder-using
-        // ajax upload to server
-        // https://stackoverflow.com/questions/45884080/ajax-request-to-upload-image-and-save-in-server?noredirect=1
-        // default fontSize: 40
-        // defaul color: 'black'
-        var canvas = new fabric.Canvas('c');
 
-        canvas.setBackgroundImage('businesscard1.png', canvas.renderAll.bind(canvas));
+        var canvas;
+        var cards;
+        var base64data;
+        var total_file;
+        function preview_image() {
+            // initialize canvas
+            canvas = new fabric.Canvas('c');
+            // set background image of canvas to be the first image uploaded
+            canvas.setBackgroundImage(URL.createObjectURL(event.target.files[0], canvas.renderAll.bind(canvas)));
+
+
+            // save all the uploaded files as base64 for later upload
+            var reader = new FileReader();
+            total_file = document.getElementById("upload_file").files.length;
+            
+            Promise.all(
+                Array.from(event.target.files)
+                    .map(file => getBase64(file)
+                    )).then(data => {
+                        // HERE ALL THE PROMISES are resolved and it'll return an array of base64 strings
+                        base64data = data;
+                    });
+
+            grid = 50;
+
+            //  display grid
+            for (var i = 0; i < (1200 / grid); i++) {
+                canvas.add(new fabric.Line([i * grid, 0, i * grid, 1200], { stroke: '#ccc', selectable: false }));
+                canvas.add(new fabric.Line([0, i * grid, 1200, i * grid], { stroke: '#ccc', selectable: false }))
+            }
+
+            canvas.on('object:moving', function (options) {
+                if (Math.round(options.target.left / grid * 4) % 4 == 0 &&
+                    Math.round(options.target.top / grid * 4) % 4 == 0) {
+                    options.target.set({
+                        left: Math.round(options.target.left / grid) * grid,
+                        top: Math.round(options.target.top / grid) * grid
+                    }).setCoords();
+                }
+            });
+        }
+
+        $("#save").on("click", function (e) {
+            var objects = null,
+                objects = canvas.getObjects();
+
+            // remove the grid lines from the canvas
+            var lines = canvas.getObjects('line');
+            for (let i in lines) {
+                canvas.remove(lines[i]);
+            }
+
+            console.log(objects);
+
+            for (var i = 0; i < objects.length; i++) {
+            }
+            // $(".save").html(canvas.toSVG());
+        });
+
+
+
         window.deleteObject = function () {
             canvas.getActiveObject().remove();
         }
@@ -292,14 +406,6 @@
         //     canvas.add(rect);
         // });
 
-        $("#save").on("click", function (e) {
-            var objects = null,
-                objects = canvas.getObjects();
-            for (var i = 0; i < objects.length; i++) {
-                console.log(objects[i]);
-            }
-            $(".save").html(canvas.toSVG());
-        });
     </script>
 
 </body>
