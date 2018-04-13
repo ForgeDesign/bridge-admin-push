@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <title>Admin Push</title>
+</head>
+
+<body>
+    <button class="btn btn-danger" onClick="deleteObject()">Delete</button>
+
+    <button class="btn btn-primary" id="first">First Name</button>
+    <button id="last" class="btn btn-primary">Last Name</button>
+    <button id="email" class="btn btn-primary">Email</button>
+    <button id="website" class="btn btn-primary">Website</button>
+    <button id="phonenum" class="btn btn-primary">Phone Number</button>
+    <button id="businame" class="btn btn-primary">Business Name</button>
+    <button id="address" class="btn btn-primary">Address</button>
+    <button id="city" class="btn btn-primary">City</button>
+    <button id="state" class="btn btn-primary">State</button>
+    <button id="zip" class="btn btn-primary">Zip Code</button>
+    <button id="save" class="btn btn-success">Submit</button>
+    <input type='text' id='fontSize' value='40' />
+    <input type='text' id='fontColor' value='#000000' />
+    <br>
+    <canvas id="c" width="1050" height="600"></canvas>
+    <br>
+    <p class="save">
+    </p>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js"></script>
+
+    <script>
+        // grab list of images in a directory
+        // https://stackoverflow.com/questions/6994212/is-there-a-way-to-return-a-list-of-all-the-image-file-names-from-a-folder-using
+        // ajax upload to server
+        // https://stackoverflow.com/questions/45884080/ajax-request-to-upload-image-and-save-in-server?noredirect=1
+        // default fontSize: 40
+        // defaul color: 'black'
+        var canvas = new fabric.Canvas('c');
+
+        canvas.setBackgroundImage('businesscard1.png', canvas.renderAll.bind(canvas));
+        window.deleteObject = function () {
+            canvas.getActiveObject().remove();
+        }
+        $("#first").on("click", function (e) {
+            text = new fabric.Text('Ryan', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+            canvas.add(text);
+        });
+        $("#last").on("click", function (e) {
+            text = new fabric.Text('Camardo', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#email").on("click", function (e) {
+            text = new fabric.Text('ryan@bridgeapp.com', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#website").on("click", function (e) {
+            text = new fabric.Text('https://bridgeapp.com', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#phonenum").on("click", function (e) {
+            text = new fabric.Text('3301849102', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#businame").on("click", function (e) {
+            text = new fabric.Text('BridgeApp', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#address").on("click", function (e) {
+            text = new fabric.Text('1849 Address Lane', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#city").on("click", function (e) {
+            text = new fabric.Text('Kent', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#state").on("click", function (e) {
+            text = new fabric.Text('OH', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        $("#zip").on("click", function (e) {
+            text = new fabric.Text('44224', {
+                left: 100,
+                top: 100,
+                fontSize: +$("#fontSize").val(),
+                fill: $("#fontColor").val()
+            });
+            text.setControlsVisibility({
+                mt: false,
+                mb: false,
+                ml: false,
+                mr: false,
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mtr: false,
+            });
+
+            canvas.add(text);
+        });
+        // $("#rect").on("click", function (e) {
+        //     rect = new fabric.Rect({
+        //         left: 40,
+        //         top: 40,
+        //         width: 50,
+        //         height: 50,
+        //         fill: 'transparent',
+        //         stroke: 'green',
+        //         strokeWidth: 5,
+        //     });
+        //     canvas.add(rect);
+        // });
+
+        // $("#circ").on("click", function (e) {
+        //     rect = new fabric.Circle({
+        //         left: 40,
+        //         top: 40,
+        //         radius: 50,
+        //         fill: 'transparent',
+        //         stroke: 'green',
+        //         strokeWidth: 5,
+        //     });
+        //     canvas.add(rect);
+        // });
+
+        $("#save").on("click", function (e) {
+            var objects = null,
+                objects = canvas.getObjects();
+            for (var i = 0; i < objects.length; i++) {
+                console.log(objects[i]);
+            }
+            $(".save").html(canvas.toSVG());
+        });
+    </script>
+
+</body>
+
+</html>
