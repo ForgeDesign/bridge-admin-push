@@ -47,25 +47,7 @@
     <br>
     <p class="save">
     </p>
-    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js"></script>
 
-    
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-database.js"></script>
-
-
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "",
-            authDomain: "bridge-card.firebaseapp.com",
-            databaseURL: "https://bridge-card.firebaseio.com",
-            projectId: "bridge-card",
-            storageBucket: "bridge-card.appspot.com",
-            messagingSenderId: ""
-        };
-        firebase.initializeApp(config);
-    </script> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -78,7 +60,6 @@
 
 
     <script>
-
     </script>
     <script>
         $("#form_upload_template").submit(function (e) {
@@ -93,7 +74,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost/bridge-admin-push/upload_file.php",
+                url: "http://localhost:8888/bridge-admin-push/upload_file.php",
                 data: JSON.stringify(myData),
                 error: function (data) {
 
@@ -119,7 +100,6 @@
             });
 
         });
-
     </script>
     <script>
         getBase64 = function getBase64(file) {
@@ -130,11 +110,9 @@
                 reader.onerror = error => reject(error);
             });
         }
-
     </script>
 
     <script>
-
         var canvas;
         var cards;
         var base64data;
@@ -154,18 +132,23 @@
 
             Promise.all(
                 Array.from(event.target.files)
-                    .map(file => getBase64(file)
-                    )).then(data => {
-                        // HERE ALL THE PROMISES are resolved and it'll return an array of base64 strings
-                        base64data = data;
-                    });
+                .map(file => getBase64(file))).then(data => {
+                // HERE ALL THE PROMISES are resolved and it'll return an array of base64 strings
+                base64data = data;
+            });
 
             grid = 50;
 
             //  display grid
             for (var i = 0; i < (1200 / grid); i++) {
-                canvas.add(new fabric.Line([i * grid, 0, i * grid, 1200], { stroke: '#ccc', selectable: false }));
-                canvas.add(new fabric.Line([0, i * grid, 1200, i * grid], { stroke: '#ccc', selectable: false }))
+                canvas.add(new fabric.Line([i * grid, 0, i * grid, 1200], {
+                    stroke: '#ccc',
+                    selectable: false
+                }));
+                canvas.add(new fabric.Line([0, i * grid, 1200, i * grid], {
+                    stroke: '#ccc',
+                    selectable: false
+                }))
             }
 
             canvas.on('object:moving', function (options) {
@@ -191,8 +174,7 @@
 
             console.log(objects);
 
-            for (var i = 0; i < objects.length; i++) {
-            }
+            for (var i = 0; i < objects.length; i++) {}
             // $(".save").html(canvas.toSVG());
         });
 
@@ -417,7 +399,6 @@
         //     });
         //     canvas.add(rect);
         // });
-
     </script>
 
 </body>
