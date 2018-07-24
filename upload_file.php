@@ -11,7 +11,7 @@ use Kreait\Firebase\ServiceAccount;
 
 // echo "Hello";
 
-$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/bridge-card-firebase-adminsdk-ja0ma-d511db887c.json');
+$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/bridge-card-firebase-adminsdk-ja0ma-a409bf1a0a.json');
 
 $firebase = (new Factory)
     ->withServiceAccount($serviceAccount)
