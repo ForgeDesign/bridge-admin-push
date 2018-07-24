@@ -36,9 +36,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $newPost = $database
 ->getReference('templateCards')
-->push([
-    $data
-]);
+->push($data);
 
 echo $newPost->getKey(); // => -KVr5eu8gcTv7_AHb-3-
 $newPost->getUri(); // => https://my-project.firebaseio.com/blog/posts/-KVr5eu8gcTv7_AHb-3-
